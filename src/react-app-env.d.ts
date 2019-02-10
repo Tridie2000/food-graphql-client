@@ -62,3 +62,11 @@ declare module '*.module.sass' {
   const classes: { [key: string]: string };
   export default classes;
 }
+
+// graphql.d.ts file
+declare module '*.graphql' {
+  import {DocumentNode} from 'graphql';
+
+  const value: DocumentNode;
+  export = value;
+}
