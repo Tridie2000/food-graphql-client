@@ -1,15 +1,9 @@
-import { gql } from 'graphql.macro';
 import { graphql } from 'react-apollo';
+import a from './queries.graphql';
 
-export const GET_STORES = gql`
-  query getStores {
-    stores() {
-      id
-      name
-    }
-  }
-`;
+console.warn(a);
+// export const getStoresQuery = graphql(getStores, {
+//   name: 'storesData',
+// });
 
-export const getStoresQuery = graphql(GET_STORES, {
-  name: 'storesData',
-});
+export const getStoresQuery = (a: any) => a;
