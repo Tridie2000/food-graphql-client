@@ -4,3 +4,16 @@ query getStores {
     name
   }
 }
+
+query getStore($id: ID) {
+  store(id: $id) {
+    id
+    name
+    products {
+      description
+      id
+      name
+      price
+    }
+  }
+}
