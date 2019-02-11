@@ -1,23 +1,58 @@
 import React from 'react';
-import { compose } from 'react-apollo';
-import { getStoresQuery } from './queries';
+import { compose, graphql } from 'react-apollo';
+import styled from 'styled-components';
+import mutations from './mutations.graphql';
+import StoreSelect from './storeSelect';
+import ProductTable from './productTable';
 
 interface CreateReservationProps {
-  storesData: object;
+  // createReservation: Function
 }
 
-class CreateReservation extends React.PureComponent<CreateReservationProps> {
-  render() {
-    const { storesData } = this.props;
-    console.warn('stores data', storesData);
-    return (
-      <form>
-        <select>
-          <option value="volvo">Volvo</option>
-        </select>
-      </form>
-    );
-  }
-}
+const Form = styled.form`
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4em;
+`;
 
-export default compose(getStoresQuery)(CreateReservation);
+const H1 = styled.h1`
+`;
+
+const Button = styled.button`
+  background: none;
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width: 200px;
+`;
+
+const CreateReservation = React.memo(({ /* createReservation */ }: CreateReservationProps) => {
+  const [reservationProducts, setReservationProducts] = React.useState<{ [key: string]: number }>({});
+  const [storeId, setStoreId] = React.useState<string>('');
+  const onChangeQuantity = React.useCallback((productId: string, quantity: string) => {
+    setReservationProducts(rps => ({
+      ...rps,
+      [productId]: parseInt(quantity, 10)
+    }));
+  }, []);
+
+  const onSubmit = React.useCallback((e) => {
+    e.preventDefault();
+    
+  }, [reservationProducts]);
+
+  return (
+    <Form onSubmit={onSubmit}>
+      <H1>Create reservation</H1>
+      <StoreSelect value={storeId} onChange={setStoreId} />
+      <ProductTable storeId={storeId} onChangeQuantity={onChangeQuantity} />
+      <Button type="submit">Reserve</Button>
+    </Form>
+  );
+});
+
+export default CreateReservation;

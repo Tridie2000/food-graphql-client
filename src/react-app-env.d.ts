@@ -63,7 +63,6 @@ declare module '*.module.sass' {
   export default classes;
 }
 
-// graphql.d.ts file
 declare module '*.graphql' {
   import {DocumentNode} from 'graphql';
 

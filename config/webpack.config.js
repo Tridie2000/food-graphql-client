@@ -309,11 +309,6 @@ module.exports = function(webpackEnv) {
           include: paths.appSrc,
         },
         {
-          test: /\.(graphql|gql)$/,
-          exclude: /node_modules/,
-          loader: require.resolve('graphql-tag/loader'),
-        },
-        {
           // "oneOf" will traverse all following loaders until one will
           // match the requirements. When no loader matches it will fall
           // back to the "file" loader at the end of the loader list.
@@ -450,6 +445,12 @@ module.exports = function(webpackEnv) {
                 },
                 'sass-loader'
               ),
+            },
+            // Support for .graphql files
+            {
+              test: /\.(graphql|gql)$/,
+              exclude: /node_modules/,
+              loader: require.resolve('graphql-tag/loader'),
             },
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.

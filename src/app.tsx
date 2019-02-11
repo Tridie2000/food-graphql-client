@@ -20,7 +20,10 @@ const apolloClient = new ApolloClient({
 // --------------
 
 // 1) First we need to create a query to get all the stores.
-// 
+//    Define the query in the queries.graphql file.
+// 2) Create a select component for the store in the storeSelect.tsx file.
+// 3) Use the Query component from react-apollo to connect the select
+//    component with the GraphQL backend.
 
 class App extends React.PureComponent {
   render() {
