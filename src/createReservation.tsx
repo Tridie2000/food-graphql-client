@@ -6,7 +6,7 @@ import StoreSelect from './storeSelect';
 import ProductTable from './productTable';
 
 interface CreateReservationProps {
-  // createReservation: Function
+  createReservation: Function
 }
 
 const Form = styled.form`
@@ -30,7 +30,7 @@ const Button = styled.button`
   width: 200px;
 `;
 
-const CreateReservation = React.memo(({ /* createReservation */ }: CreateReservationProps) => {
+const CreateReservation = React.memo(({ createReservation }: CreateReservationProps) => {
   const [reservationProducts, setReservationProducts] = React.useState<{ [key: string]: number }>({});
   const [storeId, setStoreId] = React.useState<string>('');
   const onChangeQuantity = React.useCallback((productId: string, quantity: string) => {
@@ -42,7 +42,14 @@ const CreateReservation = React.memo(({ /* createReservation */ }: CreateReserva
 
   const onSubmit = React.useCallback((e) => {
     e.preventDefault();
-    
+    createReservation({
+      variables: {
+        reservationProducts: Object.keys(reservationProducts).map(productId => ({
+          productId,
+          quantity: reservationProducts[productId]
+        }))
+      }
+    });
   }, [reservationProducts]);
 
   return (
@@ -55,4 +62,8 @@ const CreateReservation = React.memo(({ /* createReservation */ }: CreateReserva
   );
 });
 
-export default CreateReservation;
+export default compose(
+  graphql(mutations.createReservation, {
+    name: 'createReservation',
+  })
+)(CreateReservation);

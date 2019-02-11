@@ -57,6 +57,9 @@ const ProductTable = React.memo(({ onChangeQuantity, storeId }: ProductTableProp
                   <Description>{description}</Description>
                 </td>
                 <PriceTd>€ {price.toFixed(2)}</PriceTd>
+                <QuantityTd>
+                  <QuantitySelect id={id} onChange={onChangeQuantity} />
+                </QuantityTd>
               </Tr>
             ))}
           </tbody>
