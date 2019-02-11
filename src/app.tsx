@@ -16,14 +16,15 @@ const apolloClient = new ApolloClient({
 // a store, we get a list of products (query) of that store.
 // We pick some products, pick a quantity, and we make a reservation (mutation)
 
-// 🏪  Exercise 1
+// 🏪  Exercise 2
 // --------------
 
-// 1) First we need to create a query to get all the stores.
-//    Define the query in the queries.graphql file.
-// 2) Create a select component for the store in the storeSelect.tsx file.
-// 3) Use the Query component from react-apollo to connect the select
-//    component with the GraphQL backend.
+// 1) Now we want to display the products of the store.
+//    Create a query in queries.graphql to select a store,
+//    with its products, given a storeId.
+// 2) Create a table with the product data (name, description, price).
+// 3) Wrap the table in a Query component, and display the data retrieved
+//    from the GraphQL API.
 
 class App extends React.PureComponent {
   render() {
