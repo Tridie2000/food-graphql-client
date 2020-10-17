@@ -1,0 +1,6 @@
+query getStores {
+  stores {
+    id
+    name
+  }
+}

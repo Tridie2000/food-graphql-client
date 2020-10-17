@@ -1,10 +1,10 @@
-import React from 'react';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo';
-import CreateReservation from './createReservation';
+import React from "react";
+import CreateReservation from "./createReservation";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
-const apolloClient = new ApolloClient({
-  uri: "http://localhost:4000"
+const client = new ApolloClient({
+  uri: "http://localhost:4000",
+  cache: new InMemoryCache(),
 });
 
 // ⚽️  Goal
@@ -28,7 +28,7 @@ const apolloClient = new ApolloClient({
 class App extends React.PureComponent {
   render() {
     return (
-      <ApolloProvider client={apolloClient}>
+      <ApolloProvider client={client}>
         <CreateReservation />
       </ApolloProvider>
     );

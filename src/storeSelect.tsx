@@ -1,7 +1,9 @@
-import React from 'react';
-import { Query } from 'react-apollo';
-import styled from 'styled-components';
-import * as queries from './queries.graphql';
+import React from "react";
+import { Query } from "react-apollo";
+import styled from "styled-components";
+import * as queries from "./queries.graphql";
+import { ApolloClient, gql, InMemoryCache, useQuery } from "@apollo/client";
+import { storeKeyNameFromField } from "@apollo/client/utilities";
 
 const Select = styled.select`
   height: 32px;
@@ -24,13 +26,23 @@ const StoreSelect = React.memo(({ value, onChange }: StoreSelectProps) => {
     onChange(e.target.value);
   }, []);
 
+  const { loading, error, data } = useQuery(queries.getStores);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error!</p>;
+
   return (
-    <div>Store select</div>
+    <label>
+      Pick a store:
+      <select value={value} onChange={onChangeStore}>
+        {data.stores.map((store: Store) => (
+          <option key={store.id} value={store.name.toLowerCase()}>
+            {store.name}
+          </option>
+        ))}
+      </select>
+    </label>
   );
 });
 
 export default StoreSelect;
-
-
-
-
