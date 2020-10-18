@@ -4,3 +4,10 @@ query getStores {
     name
   }
 }
+
+query getProducts($storeId: String) {
+  products(storeId: $storeId) {
+    id
+    name
+  }
+}

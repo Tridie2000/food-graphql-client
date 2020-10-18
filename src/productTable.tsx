@@ -1,3 +1,4 @@
+import { useQuery } from "@apollo/client";
 import React from "react";
 import { Query } from "react-apollo";
 import styled from "styled-components";
@@ -46,7 +47,23 @@ interface ProductTableProps {
 
 const ProductTable = React.memo(
   ({ onChangeQuantity, storeId }: ProductTableProps) => {
-    return <div>Product table: {storeId}</div>;
+    const { loading, error, data } = useQuery(queries.getProducts, {
+      variables: { storeId: storeId },
+    });
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error!</p>;
+
+    return (
+      <div>
+        {data.products.map((product: Product) => (
+          <p key={product.id}>
+            {product.name}:{" "}
+            <QuantitySelect id={product.id} onChange={onChangeQuantity} />
+          </p>
+        ))}
+      </div>
+    );
   }
 );
 

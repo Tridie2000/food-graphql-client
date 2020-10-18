@@ -36,7 +36,7 @@ const StoreSelect = React.memo(({ value, onChange }: StoreSelectProps) => {
       Pick a store:
       <select value={value} onChange={onChangeStore}>
         {data.stores.map((store: Store) => (
-          <option key={store.id} value={store.name.toLowerCase()}>
+          <option key={store.id} value={store.id}>
             {store.name}
           </option>
         ))}
