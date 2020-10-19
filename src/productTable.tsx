@@ -56,12 +56,20 @@ const ProductTable = React.memo(
 
     return (
       <div>
-        {data.products.map((product: Product) => (
-          <p key={product.id}>
-            {product.name}:{" "}
-            <QuantitySelect id={product.id} onChange={onChangeQuantity} />
-          </p>
-        ))}
+        <table>
+          <tbody>
+            {data.products.map((product: Product) => (
+              <tr key={product.id}>
+                <td>{product.name}</td>
+                <td>{product.description}</td>
+                <td>{product.price}</td>
+                <td>
+                  <QuantitySelect id={product.id} onChange={onChangeQuantity} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     );
   }
