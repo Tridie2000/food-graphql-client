@@ -1,0 +1,22 @@
+version: "3.4"
+
+services:
+  foodgraphslserver:
+    image: foodgraphqlserver
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: development
+    ports:
+      - 4000:4000
+
+  foodgraphqlclient:
+    image: foodgraphqlclient
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: development
+    ports:
+      - 3000:3000
