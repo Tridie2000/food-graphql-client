@@ -1,11 +1,10 @@
-input ReservationProductInput {
-  productId: ID
-  quantity: Int
-}
-
-mutation createReservation($reservationProducts: [ReservationProductInput]) {
-  createReservation(input: { reservationProducts: $reservationProducts }) {
-    date
+mutation CreateReservation($reservation: ReservationInput) {
+  createReservation(reservation: $reservation) {
     id
+    date
+    reservationProducts {
+      productId
+      quantity
+    }
   }
 }
