@@ -1,7 +1,7 @@
 version: "3.4"
 
 services:
-  foodgraphslserver:
+  foodgraphqlserver:
     image: foodgraphqlserver
     build:
       context: .
